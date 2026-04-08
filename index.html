@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YallaMone – FinTech Solutions Bancaires</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C76A;
+    --gold-dim: rgba(201,168,76,0.15);
+    --dark: #080C14;
+    --dark2: #0E1420;
+    --dark3: #141B28;
+    --text: #E8EAF0;
+    --text-muted: #8A90A2;
+    --accent: #1ECAD3;
+    --accent2: #0F8A92;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:9999; opacity:.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 20px 60px;
+    background: linear-gradient(to bottom, rgba(8,12,20,.95), transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,.08);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links { display:flex; gap:36px; list-style:none; }
+
+  .nav-links a {
+    font-size: .85rem;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration:none;
+    transition: color .3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--dark) !important;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    color: #080C14 !important;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 140px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset:0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,168,76,.07) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 50% at 20% 80%, rgba(30,202,211,.05) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position:absolute; inset:0;
+    background-image: linear-gradient(rgba(201,168,76,.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(201,168,76,.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 60% 40%, black 30%, transparent 80%);
+  }
+
+  /* Animated orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: float 8s ease-in-out infinite;
+  }
+  .orb1 { width:400px; height:400px; background:rgba(201,168,76,.12); top:-100px; right:10%; animation-delay:0s; }
+  .orb2 { width:300px; height:300px; background:rgba(30,202,211,.08); bottom:10%; left:5%; animation-delay:-3s; }
+  .orb3 { width:200px; height:200px; background:rgba(201,168,76,.08); top:40%; right:35%; animation-delay:-5s; }
+
+  @keyframes float {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(20px,-30px) scale(1.05); }
+    66% { transform: translate(-15px,20px) scale(.95); }
+  }
+
+  .hero-content { position:relative; z-index:2; max-width:720px; }
+
+  .hero-badge {
+    display: inline-flex; align-items:center; gap:8px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(201,168,76,.3);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: .78rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    animation: fadeUp .8s ease both;
+  }
+
+  .hero-badge .dot {
+    width:6px; height:6px; border-radius:50%;
+    background:var(--gold);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -3px;
+    margin-bottom: 24px;
+    animation: fadeUp .8s ease .15s both;
+  }
+
+  h1 .line2 { color: var(--gold); }
+  h1 .line3 { color: var(--text-muted); font-weight:400; font-size:.55em; letter-spacing:-1px; }
+
+  .hero-desc {
+    font-size:1.1rem; line-height:1.8;
+    color: var(--text-muted);
+    max-width:520px;
+    margin-bottom:48px;
+    animation: fadeUp .8s ease .3s both;
+  }
+
+  .hero-actions {
+    display:flex; gap:16px; flex-wrap:wrap;
+    animation: fadeUp .8s ease .45s both;
+  }
+
+  .btn-primary {
+    display:inline-flex; align-items:center; gap:10px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--dark);
+    padding: 15px 32px;
+    border-radius: 6px;
+    font-family:'Syne',sans-serif;
+    font-weight:700;
+    font-size:.95rem;
+    text-decoration:none;
+    transition: transform .3s, box-shadow .3s;
+    box-shadow: 0 8px 30px rgba(201,168,76,.25);
+  }
+
+  .btn-primary:hover { transform:translateY(-3px); box-shadow:0 16px 40px rgba(201,168,76,.35); }
+
+  .btn-secondary {
+    display:inline-flex; align-items:center; gap:10px;
+    border: 1px solid rgba(201,168,76,.3);
+    color: var(--gold);
+    padding: 15px 32px;
+    border-radius: 6px;
+    font-family:'Syne',sans-serif;
+    font-weight:600;
+    font-size:.95rem;
+    text-decoration:none;
+    transition: background .3s, transform .3s;
+  }
+
+  .btn-secondary:hover { background:var(--gold-dim); transform:translateY(-3px); }
+
+  /* Stats bar */
+  .stats-bar {
+    margin-top: 80px;
+    display: flex; gap:60px; flex-wrap:wrap;
+    animation: fadeUp .8s ease .6s both;
+  }
+
+  .stat { display:flex; flex-direction:column; gap:4px; }
+
+  .stat-number {
+    font-family:'Syne',sans-serif;
+    font-size:2.2rem; font-weight:800;
+    color: var(--gold);
+    line-height:1;
+  }
+
+  .stat-label {
+    font-size:.78rem; text-transform:uppercase;
+    letter-spacing:.1em; color:var(--text-muted);
+  }
+
+  /* Awards ribbon */
+  .awards-strip {
+    background: linear-gradient(135deg, rgba(201,168,76,.1), rgba(201,168,76,.05));
+    border: 1px solid rgba(201,168,76,.15);
+    border-left: 3px solid var(--gold);
+    padding: 20px 60px;
+    display:flex; align-items:center; gap:40px; flex-wrap:wrap;
+  }
+
+  .awards-label {
+    font-size:.75rem; text-transform:uppercase;
+    letter-spacing:.12em; color:var(--gold);
+    font-weight:600; white-space:nowrap;
+  }
+
+  .award-item {
+    display:flex; align-items:center; gap:10px;
+    font-size:.85rem; color:var(--text-muted);
+  }
+
+  .award-icon { font-size:1.2rem; }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 60px; }
+
+  .section-label {
+    font-size:.75rem; text-transform:uppercase;
+    letter-spacing:.18em; color:var(--gold);
+    font-weight:600; margin-bottom:16px;
+  }
+
+  h2 {
+    font-family:'Syne',sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight:800;
+    letter-spacing:-2px;
+    line-height:1.1;
+    margin-bottom:20px;
+  }
+
+  h2 em { font-style:normal; color:var(--gold); }
+
+  .section-sub {
+    color:var(--text-muted); font-size:1rem;
+    line-height:1.8; max-width:560px; margin-bottom:60px;
+  }
+
+  /* ── PRODUCTS ── */
+  .products { background: var(--dark2); }
+
+  .products-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap:24px;
+    margin-top:60px;
+  }
+
+  .product-card {
+    background: var(--dark3);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius:12px;
+    padding:36px;
+    position:relative;
+    overflow:hidden;
+    transition: transform .4s, border-color .4s, box-shadow .4s;
+    cursor:default;
+  }
+
+  .product-card::before {
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform:scaleX(0);
+    transition:transform .4s;
+  }
+
+  .product-card:hover {
+    transform:translateY(-6px);
+    border-color: rgba(201,168,76,.25);
+    box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 40px rgba(201,168,76,.05);
+  }
+
+  .product-card:hover::before { transform:scaleX(1); }
+
+  .product-icon {
+    width:52px; height:52px;
+    background: var(--gold-dim);
+    border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem;
+    margin-bottom:24px;
+    border: 1px solid rgba(201,168,76,.2);
+  }
+
+  .product-card h3 {
+    font-family:'Syne',sans-serif;
+    font-size:1.25rem; font-weight:700;
+    margin-bottom:12px;
+  }
+
+  .product-card p {
+    font-size:.9rem; line-height:1.7;
+    color:var(--text-muted);
+    margin-bottom:20px;
+  }
+
+  .product-badge {
+    display:inline-block;
+    background: rgba(30,202,211,.1);
+    border: 1px solid rgba(30,202,211,.25);
+    color: var(--accent);
+    font-size:.72rem; letter-spacing:.1em;
+    text-transform:uppercase; padding:4px 12px;
+    border-radius:100px;
+  }
+
+  /* Featured card */
+  .product-card.featured {
+    border-color: rgba(201,168,76,.3);
+    background: linear-gradient(135deg, var(--dark3), rgba(201,168,76,.04));
+  }
+
+  .product-card.featured .product-icon {
+    background: linear-gradient(135deg, rgba(201,168,76,.25), rgba(201,168,76,.1));
+  }
+
+  /* ── HOW IT WORKS ── */
+  .how {
+    position:relative;
+  }
+
+  .how-grid {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:80px;
+    align-items:center;
+  }
+
+  .how-steps { display:flex; flex-direction:column; gap:0; }
+
+  .step {
+    display:flex; gap:24px;
+    padding:28px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    position:relative;
+  }
+
+  .step:last-child { border-bottom:none; }
+
+  .step-num {
+    font-family:'Syne',sans-serif;
+    font-size:2.5rem; font-weight:800;
+    color:rgba(201,168,76,.2);
+    line-height:1;
+    min-width:60px;
+    transition:color .3s;
+  }
+
+  .step:hover .step-num { color:var(--gold); }
+
+  .step-content h4 {
+    font-family:'Syne',sans-serif;
+    font-size:1rem; font-weight:700;
+    margin-bottom:8px;
+  }
+
+  .step-content p { font-size:.88rem; line-height:1.7; color:var(--text-muted); }
+
+  /* Dashboard mockup */
+  .dashboard-mock {
+    background: var(--dark3);
+    border:1px solid rgba(201,168,76,.15);
+    border-radius:16px;
+    padding:24px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.5), 0 0 60px rgba(201,168,76,.04);
+  }
+
+  .mock-header {
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:24px;
+  }
+
+  .mock-dots { display:flex; gap:8px; }
+  .mock-dot { width:10px; height:10px; border-radius:50%; }
+  .mock-dot.r { background:#FF5F57; }
+  .mock-dot.y { background:#FEBC2E; }
+  .mock-dot.g { background:#28C840; }
+
+  .mock-title { font-size:.8rem; color:var(--text-muted); font-family:'Syne',sans-serif; letter-spacing:.05em; }
+
+  .mock-kpis {
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:12px; margin-bottom:20px;
+  }
+
+  .mock-kpi {
+    background:var(--dark2);
+    border-radius:8px; padding:16px;
+    border:1px solid rgba(255,255,255,.05);
+  }
+
+  .mock-kpi-label { font-size:.7rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text-muted); margin-bottom:6px; }
+  .mock-kpi-val { font-family:'Syne',sans-serif; font-size:1.4rem; font-weight:800; color:var(--gold); }
+  .mock-kpi-delta { font-size:.72rem; color:#3DCC7E; margin-top:2px; }
+
+  .mock-bar-area { margin-bottom:20px; }
+  .mock-bar-label { font-size:.72rem; color:var(--text-muted); margin-bottom:8px; display:flex; justify-content:space-between; }
+
+  .mock-bar-track {
+    height:6px; background:rgba(255,255,255,.06);
+    border-radius:3px; overflow:hidden;
+  }
+
+  .mock-bar-fill {
+    height:100%; border-radius:3px;
+    background:linear-gradient(90deg, var(--gold), var(--gold-light));
+    animation: grow 1.5s ease .5s both;
+  }
+
+  @keyframes grow { from{width:0} }
+
+  .mock-bar-fill.cyan {
+    background:linear-gradient(90deg, var(--accent2), var(--accent));
+  }
+
+  .mock-items { display:flex; flex-direction:column; gap:8px; }
+
+  .mock-row {
+    display:flex; align-items:center; justify-content:space-between;
+    background:var(--dark2);
+    padding:10px 14px;
+    border-radius:6px;
+    font-size:.78rem;
+  }
+
+  .mock-row-id { color:var(--text-muted); font-size:.7rem; }
+  .mock-row-status {
+    font-size:.65rem; padding:3px 8px;
+    border-radius:100px;
+    background:rgba(61,204,126,.12); color:#3DCC7E;
+    border:1px solid rgba(61,204,126,.2);
+  }
+
+  /* ── PERFORMANCE ── */
+  .perf { background:var(--dark2); }
+
+  .perf-grid {
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:1px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:12px;
+    overflow:hidden;
+    margin-top:60px;
+  }
+
+  .perf-item {
+    background:var(--dark3);
+    padding:40px 36px;
+    transition:background .3s;
+  }
+
+  .perf-item:hover { background:var(--dark2); }
+
+  .perf-big {
+    font-family:'Syne',sans-serif;
+    font-size:3.5rem; font-weight:800;
+    color:var(--gold);
+    line-height:1;
+    margin-bottom:8px;
+  }
+
+  .perf-desc { font-size:.88rem; line-height:1.7; color:var(--text-muted); }
+  .perf-item h4 { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; margin-bottom:12px; }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:center;
+  }
+
+  .about-text p { font-size:.95rem; line-height:1.9; color:var(--text-muted); margin-bottom:20px; }
+
+  .about-text strong { color:var(--text); }
+
+  .cert-badges {
+    display:flex; gap:12px; flex-wrap:wrap;
+    margin-top:32px;
+  }
+
+  .cert-badge {
+    display:flex; align-items:center; gap:8px;
+    background:var(--dark3);
+    border:1px solid rgba(201,168,76,.15);
+    padding:8px 16px;
+    border-radius:6px;
+    font-size:.8rem;
+    color:var(--text-muted);
+  }
+
+  .cert-badge .icon { color:var(--gold); font-size:1rem; }
+
+  .timeline {
+    display:flex; flex-direction:column;
+    gap:0;
+    border-left:2px solid rgba(201,168,76,.2);
+    padding-left:32px;
+    margin-left:16px;
+  }
+
+  .tl-item {
+    padding-bottom:32px;
+    position:relative;
+  }
+
+  .tl-item::before {
+    content:'';
+    position:absolute;
+    left:-41px; top:4px;
+    width:12px; height:12px;
+    border-radius:50%;
+    background:var(--gold);
+    border:3px solid var(--dark);
+    box-shadow:0 0 0 4px rgba(201,168,76,.15);
+  }
+
+  .tl-year {
+    font-family:'Syne',sans-serif;
+    font-size:.75rem; text-transform:uppercase;
+    letter-spacing:.15em; color:var(--gold);
+    margin-bottom:4px;
+  }
+
+  .tl-title {
+    font-family:'Syne',sans-serif;
+    font-size:.95rem; font-weight:700; margin-bottom:4px;
+  }
+
+  .tl-desc { font-size:.83rem; color:var(--text-muted); line-height:1.6; }
+
+  /* ── CONTACT ── */
+  .contact { background:var(--dark2); }
+
+  .contact-grid {
+    display:grid;
+    grid-template-columns:1fr 1.5fr;
+    gap:80px;
+  }
+
+  .contact-info p { font-size:.92rem; line-height:1.8; color:var(--text-muted); margin-bottom:32px; }
+
+  .contact-items { display:flex; flex-direction:column; gap:20px; }
+
+  .contact-item {
+    display:flex; align-items:flex-start; gap:16px;
+  }
+
+  .contact-icon {
+    width:40px; height:40px; border-radius:8px;
+    background:var(--gold-dim);
+    border:1px solid rgba(201,168,76,.2);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1rem; flex-shrink:0;
+  }
+
+  .contact-item-text .label {
+    font-size:.72rem; text-transform:uppercase; letter-spacing:.1em;
+    color:var(--gold); margin-bottom:2px;
+  }
+
+  .contact-item-text .value { font-size:.9rem; }
+
+  .form-grid { display:grid; gap:16px; }
+
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+
+  .form-field { display:flex; flex-direction:column; gap:6px; }
+
+  .form-field label { font-size:.75rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text-muted); }
+
+  .form-field input, .form-field textarea, .form-field select {
+    background:var(--dark3);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:6px;
+    padding:13px 16px;
+    color:var(--text);
+    font-family:'DM Sans',sans-serif;
+    font-size:.9rem;
+    transition:border-color .3s;
+    outline:none;
+  }
+
+  .form-field input:focus, .form-field textarea:focus, .form-field select:focus {
+    border-color:rgba(201,168,76,.4);
+    box-shadow:0 0 0 3px rgba(201,168,76,.08);
+  }
+
+  .form-field select { appearance:none; cursor:pointer; }
+  .form-field textarea { resize:vertical; min-height:120px; }
+
+  .form-submit {
+    background:linear-gradient(135deg, var(--gold), var(--gold-light));
+    color:var(--dark);
+    border:none;
+    padding:15px 40px;
+    border-radius:6px;
+    font-family:'Syne',sans-serif;
+    font-weight:700;
+    font-size:.95rem;
+    cursor:pointer;
+    transition:transform .3s, box-shadow .3s;
+    align-self:flex-start;
+  }
+
+  .form-submit:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(201,168,76,.3); }
+
+  /* ── FOOTER ── */
+  footer {
+    background:var(--dark);
+    border-top:1px solid rgba(255,255,255,.06);
+    padding:60px 60px 40px;
+  }
+
+  .footer-grid {
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:60px;
+    margin-bottom:60px;
+  }
+
+  .footer-brand p { font-size:.88rem; line-height:1.7; color:var(--text-muted); margin-top:16px; max-width:280px; }
+
+  .footer-col h5 {
+    font-family:'Syne',sans-serif;
+    font-size:.8rem; text-transform:uppercase;
+    letter-spacing:.15em; color:var(--gold);
+    margin-bottom:20px;
+  }
+
+  .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+
+  .footer-col a {
+    font-size:.88rem; color:var(--text-muted);
+    text-decoration:none; transition:color .3s;
+  }
+
+  .footer-col a:hover { color:var(--gold); }
+
+  .footer-bottom {
+    border-top:1px solid rgba(255,255,255,.05);
+    padding-top:32px;
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:16px;
+  }
+
+  .footer-bottom p { font-size:.82rem; color:var(--text-muted); }
+
+  .footer-bottom-links { display:flex; gap:24px; }
+
+  .footer-bottom-links a {
+    font-size:.82rem; color:var(--text-muted);
+    text-decoration:none; transition:color .3s;
+  }
+
+  .footer-bottom-links a:hover { color:var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(30px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+
+  .reveal {
+    opacity:0; transform:translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+
+  .reveal.visible {
+    opacity:1; transform:translateY(0);
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background:var(--dark); }
+  ::-webkit-scrollbar-thumb { background:rgba(201,168,76,.3); border-radius:3px; }
+  ::-webkit-scrollbar-thumb:hover { background:var(--gold); }
+
+  /* Responsive */
+  @media(max-width:900px) {
+    nav { padding:16px 24px; }
+    .nav-links { display:none; }
+    section { padding:70px 24px; }
+    .hero { padding:120px 24px 60px; }
+    .how-grid, .about-grid, .contact-grid { grid-template-columns:1fr; gap:40px; }
+    .perf-grid { grid-template-columns:1fr 1fr; }
+    .footer-grid { grid-template-columns:1fr 1fr; }
+    .form-row { grid-template-columns:1fr; }
+    .awards-strip { padding:20px 24px; }
+    .stats-bar { gap:32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Yalla<span>Mone</span></a>
+  <ul class="nav-links">
+    <li><a href="#produits">Produits</a></li>
+    <li><a href="#fonctionnement">Fonctionnement</a></li>
+    <li><a href="#performance">Performance</a></li>
+    <li><a href="#a-propos">À Propos</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Solutions FinTech Certifiées · Maroc
+    </div>
+
+    <h1>
+      L'Intelligence<br>
+      <span class="line2">Bancaire,</span><br>
+      <span class="line3">Réinventée.</span>
+    </h1>
+
+    <p class="hero-desc">
+      YallaMone automatise et optimise vos opérations monétiques et de contrôle bancaire grâce à des outils innovants, réduisant le temps de traitement de 95 % tout en garantissant une conformité réglementaire totale.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#produits" class="btn-primary">
+        Découvrir nos solutions
+        <span>→</span>
+      </a>
+      <a href="#contact" class="btn-secondary">
+        Demander une démo
+        <span>↗</span>
+      </a>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-number">95%</span>
+        <span class="stat-label">Réduction temps traitement</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">35+</span>
+        <span class="stat-label">Années d'expertise</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">2min</span>
+        <span class="stat-label">Par dossier (vs 45min)</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Conformité réglementaire</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<div class="awards-strip">
+  <span class="awards-label">🏆 Récompenses</span>
+  <div class="award-item">
+    <span class="award-icon">🥇</span>
+    Morocco FinTech Accelerator Program 2023
+  </div>
+  <div class="award-item">
+    <span class="award-icon">🏅</span>
+    Bank of Africa – In'Pulse Contest
+  </div>
+  <div class="award-item">
+    <span class="award-icon">🎓</span>
+    AI & Data Engineering Certified 2024
+  </div>
+  <div class="award-item">
+    <span class="award-icon">🏦</span>
+    ESB Paris – Banking Excellence
+  </div>
+</div>
+
+<!-- PRODUITS -->
+<section class="products" id="produits">
+  <div class="section-label">Nos Solutions</div>
+  <h2>Des outils <em>puissants</em><br>pour la banque moderne</h2>
+  <p class="section-sub">YallaMone propose une suite complète d'applications dédiées au traitement automatisé des fichiers bancaires, à la réconciliation et au contrôle monétique.</p>
+
+  <div class="products-grid reveal">
+
+    <div class="product-card featured">
+      <div class="product-icon">⚡</div>
+      <h3>Processeur TRFJOUR</h3>
+      <p>Automatisation complète du traitement des fichiers de transactions journalières. Extraction intelligente, enrichissement multi-phase et export vers Excel/CSV en temps réel.</p>
+      <span class="product-badge">Core Product</span>
+    </div>
+
+    <div class="product-card">
+      <div class="product-icon">🔄</div>
+      <h3>Réconciliation Automatique</h3>
+      <p>Plateforme de rapprochement multi-formats gérant simultanément les fichiers SORGAB, TT464 et LIS. Algorithmes de matching intelligents par type de compte.</p>
+      <span class="product-badge">Réconciliation</span>
+    </div>
+
+    <div class="product-card">
+      <div class="product-icon">📊</div>
+      <h3>Extracteur de Commissions</h3>
+      <p>Outil dédié à l'extraction et l'analyse des commissions depuis les données LIS. Interface utilisateur intuitive avec tableaux de bord et rapports automatisés.</p>
+      <span class="product-badge">Analyse</span>
+    </div>
+
+    <div class="product-card">
+      <div class="product-icon">🔍</div>
+      <h3>Analyse TT464</h3>
+      <p>Système de traitement spécialisé pour les fichiers TT464 avec validation structurée, détection d'anomalies et reporting de conformité aux normes bancaires marocaines.</p>
+      <span class="product-badge">Conformité</span>
+    </div>
+
+    <div class="product-card">
+      <div class="product-icon">🛡️</div>
+      <h3>Contrôle Monétique</h3>
+      <p>Suite de contrôle permanent des opérations de paiement par carte. Surveillance en temps réel, alertes intelligentes et traçabilité complète des transactions.</p>
+      <span class="product-badge">Contrôle</span>
+    </div>
+
+    <div class="product-card">
+      <div class="product-icon">📁</div>
+      <h3>Convertisseur de Formats</h3>
+      <p>Conversion inter-formats entre les principaux standards bancaires (SORGAB, TT464, LIS, TRFJOUR). Préservation de l'intégrité des données et validation automatique.</p>
+      <span class="product-badge">Utilitaire</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- FONCTIONNEMENT -->
+<section class="how" id="fonctionnement">
+  <div class="how-grid">
+    <div class="reveal">
+      <div class="section-label">Comment ça marche</div>
+      <h2>Un traitement <em>en 4 étapes</em><br>entièrement automatisé</h2>
+      <p class="section-sub">Notre pipeline de traitement transforme vos fichiers bruts en données exploitables, fiables et conformes.</p>
+
+      <div class="how-steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h4>Import & Détection</h4>
+            <p>Chargement du fichier bancaire avec reconnaissance automatique du format (TRFJOUR, SORGAB, TT464, LIS) et validation de la structure.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h4>Parsing & Enrichissement</h4>
+            <p>Extraction des champs, calcul des soldes, identification des types de transactions et enrichissement multi-phase des données.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h4>Rapprochement & Contrôle</h4>
+            <p>Algorithmes de matching sophistiqués, détection des écarts, validation de la conformité et génération des alertes.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <h4>Export & Reporting</h4>
+            <p>Génération automatique de rapports Excel/CSV, tableaux de bord de synthèse et archivage sécurisé des résultats.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Mockup -->
+    <div class="dashboard-mock reveal">
+      <div class="mock-header">
+        <div class="mock-dots">
+          <div class="mock-dot r"></div>
+          <div class="mock-dot y"></div>
+          <div class="mock-dot g"></div>
+        </div>
+        <div class="mock-title">YallaMone Dashboard · Contrôle Monétique</div>
+      </div>
+
+      <div class="mock-kpis">
+        <div class="mock-kpi">
+          <div class="mock-kpi-label">Transactions traitées</div>
+          <div class="mock-kpi-val">14,872</div>
+          <div class="mock-kpi-delta">▲ +12.4% ce mois</div>
+        </div>
+        <div class="mock-kpi">
+          <div class="mock-kpi-label">Taux de reconciliation</div>
+          <div class="mock-kpi-val">99.7%</div>
+          <div class="mock-kpi-delta">▲ Conformité totale</div>
+        </div>
+      </div>
+
+      <div class="mock-bar-area">
+        <div class="mock-bar-label"><span>TRFJOUR – Fichiers traités</span><span>847/850</span></div>
+        <div class="mock-bar-track"><div class="mock-bar-fill" style="width:99%"></div></div>
+      </div>
+
+      <div class="mock-bar-area">
+        <div class="mock-bar-label"><span>SORGAB – Rapprochement</span><span>98.2%</span></div>
+        <div class="mock-bar-track"><div class="mock-bar-fill cyan" style="width:98%"></div></div>
+      </div>
+
+      <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin:20px 0 10px;">Dernières opérations</div>
+
+      <div class="mock-items">
+        <div class="mock-row">
+          <span>TRF-2024-0847</span>
+          <span class="mock-row-id">TRFJOUR · 09:14</span>
+          <span class="mock-row-status">Validé</span>
+        </div>
+        <div class="mock-row">
+          <span>TT464-2024-0312</span>
+          <span class="mock-row-id">TT464 · 08:52</span>
+          <span class="mock-row-status">Validé</span>
+        </div>
+        <div class="mock-row">
+          <span>LIS-COM-2024-0156</span>
+          <span class="mock-row-id">LIS · 08:30</span>
+          <span class="mock-row-status">Validé</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFORMANCE -->
+<section class="perf" id="performance">
+  <div class="section-label">Résultats Mesurés</div>
+  <h2>Des chiffres qui <em>parlent</em><br>d'eux-mêmes</h2>
+  <p class="section-sub">Les performances de YallaMone sont documentées et vérifiées dans des environnements bancaires réels.</p>
+
+  <div class="perf-grid reveal">
+    <div class="perf-item">
+      <div class="perf-big">2min</div>
+      <h4>Temps de traitement</h4>
+      <p class="perf-desc">Réduction du traitement par dossier de 45 minutes à 2 minutes. Une performance qui transforme radicalement la productivité des équipes de contrôle.</p>
+    </div>
+    <div class="perf-item">
+      <div class="perf-big">95%</div>
+      <h4>Gain de productivité</h4>
+      <p class="perf-desc">Réduction massive du temps opérationnel permettant aux équipes de se concentrer sur l'analyse à valeur ajoutée plutôt que la saisie manuelle.</p>
+    </div>
+    <div class="perf-item">
+      <div class="perf-big">99.7%</div>
+      <h4>Précision de réconciliation</h4>
+      <p class="perf-desc">Taux de rapprochement quasi parfait grâce aux algorithmes de matching multicritères adaptés aux spécificités des formats bancaires marocains.</p>
+    </div>
+    <div class="perf-item">
+      <div class="perf-big">0</div>
+      <h4>Erreurs de conformité</h4>
+      <p class="perf-desc">Conformité totale aux normes réglementaires bancaires marocaines avec validation automatique à chaque étape du traitement.</p>
+    </div>
+    <div class="perf-item">
+      <div class="perf-big">10k+</div>
+      <h4>Fichiers traités</h4>
+      <p class="perf-desc">Capacité éprouvée sur des volumes importants de transactions bancaires en conditions réelles de production.</p>
+    </div>
+    <div class="perf-item">
+      <div class="perf-big">4</div>
+      <h4>Formats supportés</h4>
+      <p class="perf-desc">Prise en charge native des formats TRFJOUR, SORGAB, TT464 et LIS, couvrant l'essentiel des standards monétiques marocains.</p>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section id="a-propos">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <div class="section-label">À Propos</div>
+      <h2>L'expertise bancaire<br>au service de <em>l'innovation</em></h2>
+
+      <p>YallaMone est née d'une conviction simple : <strong>35 années d'expérience en contrôle bancaire</strong> combinées aux technologies modernes peuvent transformer radicalement l'efficacité opérationnelle des institutions financières.</p>
+
+      <p>Fondée par un expert issu de Bank of Africa, YallaMone s'appuie sur une connaissance intime des <strong>formats et processus monétiques marocains</strong> pour proposer des solutions qui répondent précisément aux défis du terrain.</p>
+
+      <p>De Chef de Service à Responsable de la Division Contrôle Monétique, chaque solution YallaMone est conçue par quelqu'un qui a vécu les problèmes qu'il résout.</p>
+
+      <div class="cert-badges">
+        <div class="cert-badge"><span class="icon">🎓</span>AI & Data Engineering 2024</div>
+        <div class="cert-badge"><span class="icon">🏦</span>ESB Paris – Banking</div>
+        <div class="cert-badge"><span class="icon">🌍</span>Bank of Africa Group</div>
+        <div class="cert-badge"><span class="icon">🏆</span>FinTech Accelerator Morocco</div>
+      </div>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-year">1990</div>
+        <div class="tl-title">Début de carrière bancaire</div>
+        <div class="tl-desc">Entrée dans le secteur bancaire marocain, début d'une expertise dans le contrôle et les opérations financières.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2005+</div>
+        <div class="tl-title">Chef de Service – Contrôle Interne</div>
+        <div class="tl-desc">Management des équipes de vérification interne, maîtrise des processus monétiques et formats de fichiers bancaires.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2015+</div>
+        <div class="tl-title">Responsable Division Contrôle Monétique</div>
+        <div class="tl-desc">Supervision des opérations de paiement par carte, mise en place des systèmes de contrôle permanent à Bank of Africa.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2023</div>
+        <div class="tl-title">Lancement YallaMone</div>
+        <div class="tl-desc">Victoire au Morocco FinTech Accelerator Program et à l'In'Pulse Contest de Bank of Africa. Validation de la solution par le marché.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2024</div>
+        <div class="tl-title">Certifications IA & Data Engineering</div>
+        <div class="tl-desc">Renforcement des compétences en intelligence artificielle et ingénierie de la donnée pour enrichir les solutions YallaMone.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="section-label">Contact</div>
+      <h2>Prêt à transformer<br>vos <em>opérations</em> ?</h2>
+      <p>Contactez-nous pour une démonstration personnalisée de nos solutions ou pour discuter de vos besoins spécifiques en matière de contrôle monétique et de traitement de fichiers bancaires.</p>
+
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-item-text">
+            <div class="label">Localisation</div>
+            <div class="value">Maroc – Groupe Bank of Africa</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💼</div>
+          <div class="contact-item-text">
+            <div class="label">Secteur</div>
+            <div class="value">FinTech · Contrôle Bancaire · Monétique</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🏆</div>
+          <div class="contact-item-text">
+            <div class="label">Distinction</div>
+            <div class="value">Morocco FinTech Accelerator Program Winner</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">⚡</div>
+          <div class="contact-item-text">
+            <div class="label">Réponse</div>
+            <div class="value">Sous 24 heures ouvrées</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form class="form-grid reveal" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-field">
+          <label>Prénom & Nom</label>
+          <input type="text" placeholder="Ahmed Benali" required>
+        </div>
+        <div class="form-field">
+          <label>Établissement</label>
+          <input type="text" placeholder="Banque XYZ" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" placeholder="a.benali@banque.ma" required>
+        </div>
+        <div class="form-field">
+          <label>Téléphone</label>
+          <input type="tel" placeholder="+212 6XX XXX XXX">
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Solution d'intérêt</label>
+        <select>
+          <option value="">Sélectionner une solution...</option>
+          <option>Processeur TRFJOUR</option>
+          <option>Réconciliation Automatique</option>
+          <option>Extracteur de Commissions</option>
+          <option>Analyse TT464</option>
+          <option>Contrôle Monétique</option>
+          <option>Suite complète YallaMone</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Message</label>
+        <textarea placeholder="Décrivez vos besoins ou posez vos questions..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Envoyer la demande →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo">Yalla<span style="color:var(--accent)">Mone</span></div>
+      <p>Solutions FinTech innovantes pour le contrôle bancaire et la monétique. Transformez vos opérations avec l'intelligence artificielle au service de la conformité.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Solutions</h5>
+      <ul>
+        <li><a href="#produits">Processeur TRFJOUR</a></li>
+        <li><a href="#produits">Réconciliation</a></li>
+        <li><a href="#produits">Extracteur LIS</a></li>
+        <li><a href="#produits">Analyse TT464</a></li>
+        <li><a href="#produits">Contrôle Monétique</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Entreprise</h5>
+      <ul>
+        <li><a href="#a-propos">À Propos</a></li>
+        <li><a href="#performance">Performances</a></li>
+        <li><a href="#fonctionnement">Fonctionnement</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Distinctions</h5>
+      <ul>
+        <li><a href="#">FinTech Accelerator Morocco</a></li>
+        <li><a href="#">BOA In'Pulse Contest</a></li>
+        <li><a href="#">AI Certified 2024</a></li>
+        <li><a href="#">ESB Paris Banking</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2024 YallaMone FinTech. Tous droits réservés.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Politique de confidentialité</a>
+      <a href="#">Mentions légales</a>
+      <a href="#">CGU</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Animated counters on scroll
+  function animateCounter(el, target, suffix='') {
+    let start = 0;
+    const duration = 1500;
+    const step = (timestamp) => {
+      if(!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(ease * target) + suffix;
+      if(progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  // Form handler
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '✓ Demande envoyée !';
+    btn.style.background = 'linear-gradient(135deg, #3DCC7E, #2AA060)';
+    setTimeout(() => {
+      btn.textContent = 'Envoyer la demande →';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+
+  // Smooth nav scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if(target) target.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
+
+  // Nav background on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if(window.scrollY > 50) {
+      nav.style.background = 'rgba(8,12,20,0.97)';
+    } else {
+      nav.style.background = 'linear-gradient(to bottom, rgba(8,12,20,.95), transparent)';
+    }
+  });
+</script>
+</body>
+</html>
