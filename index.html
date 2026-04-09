@@ -1441,37 +1441,154 @@
 
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;max-width:1100px;margin:0 auto;">
 
-    <!-- App 1 : Arrêté Comptable -->
-    <div class="reveal" style="background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,.15);border-top:3px solid var(--gold);border-radius:16px;padding:32px 28px;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;">
+    <!-- App 1 : Arrêté Comptable — Aperçu complet -->
+    <div class="reveal" style="background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,.15);border-top:3px solid var(--gold);border-radius:16px;padding:32px 28px;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;grid-column:1 / -1;">
       <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);"></div>
 
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
-        <div style="width:52px;height:52px;border-radius:12px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;font-size:1.5rem;">📊</div>
-        <div>
-          <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);font-weight:600;">TRFJOUR · v3.43</div>
-          <div style="font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);">Arrêté Comptable Monétique</div>
+      <!-- En-tête application -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:28px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:52px;height:52px;border-radius:12px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;font-size:1.5rem;">📊</div>
+          <div>
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);font-weight:600;">TRFJOUR · v3.43</div>
+            <div style="font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text);">Arrêté Comptable Monétique — État des Rapprochements 70 CG</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span style="font-size:.7rem;padding:4px 12px;border-radius:20px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gold);">Arrêtés comptables</span>
+          <span style="font-size:.7rem;padding:4px 12px;border-radius:20px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gold);">États de gestion</span>
+          <span style="font-size:.7rem;padding:4px 12px;border-radius:20px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gold);">Échantillonnage contrôle</span>
+          <span style="font-size:.7rem;padding:4px 12px;border-radius:20px;background:rgba(30,202,211,.08);border:1px solid rgba(30,202,211,.2);color:var(--accent);">70 CG monétiques</span>
         </div>
       </div>
 
-      <p style="font-size:.88rem;color:var(--text-muted);line-height:1.75;margin-bottom:20px;">
-        Traitement automatisé des fichiers TRFJOUR : génération des <strong style="color:var(--text);">arrêtés comptables complets</strong>, états de gestion détaillés et création d'<strong style="color:var(--text);">échantillons pour le contrôle</strong>. Réconciliation avec les comptes généraux CG et sous-comptes SCOMPTE.
-      </p>
+      <!-- Phases de traitement -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:28px;">
 
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;">
-        <span style="font-size:.7rem;padding:3px 10px;border-radius:20px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gold);">Arrêtés comptables</span>
-        <span style="font-size:.7rem;padding:3px 10px;border-radius:20px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gold);">États de gestion</span>
-        <span style="font-size:.7rem;padding:3px 10px;border-radius:20px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gold);">Échantillonnage</span>
-        <span style="font-size:.7rem;padding:3px 10px;border-radius:20px;background:rgba(30,202,211,.08);border:1px solid rgba(30,202,211,.2);color:var(--accent);">Contrôle monétique</span>
+        <!-- Phase 1 -->
+        <div style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:20px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#1a2332;flex-shrink:0;">1</div>
+            <div style="font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:#f59e0b;">Import des fichiers TRFJOUR</div>
+          </div>
+          <p style="font-size:.8rem;color:var(--text-muted);line-height:1.65;margin-bottom:12px;">Glisser-déposer ou sélection multiple de fichiers TRFJOUR (tous formats, avec ou sans extension). Détection automatique des combinaisons CF/CG/SCOMPTE disponibles.</p>
+          <div style="background:rgba(0,0,0,.2);border-radius:8px;padding:12px;font-size:.72rem;color:rgba(245,158,11,.7);border:1px solid rgba(245,158,11,.1);">
+            <div style="margin-bottom:4px;font-weight:600;color:#f59e0b;">📂 Zone de dépôt</div>
+            <div>Formats acceptés : tous fichiers incluant sans extension</div>
+            <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">
+              <span style="background:rgba(245,158,11,.15);padding:2px 8px;border-radius:4px;">TRFJOUR</span>
+              <span style="background:rgba(245,158,11,.15);padding:2px 8px;border-radius:4px;">Multi-fichiers</span>
+              <span style="background:rgba(245,158,11,.15);padding:2px 8px;border-radius:4px;">Batch</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div style="background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2);border-radius:12px;padding:20px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#fff;flex-shrink:0;">2</div>
+            <div style="font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:#3b82f6;">Sélection CG / Combinaison</div>
+          </div>
+          <p style="font-size:.8rem;color:var(--text-muted);line-height:1.65;margin-bottom:12px;">Choix de la combinaison CF/CG/SCOMPTE à traiter parmi celles détectées. Option d'inclure ou exclure les lignes pré-marquées "OK" pour un fichier allégé.</p>
+          <div style="background:rgba(0,0,0,.2);border-radius:8px;padding:10px;font-size:.72rem;color:rgba(59,130,246,.7);border:1px solid rgba(59,130,246,.1);">
+            <div style="font-weight:600;color:#3b82f6;margin-bottom:6px;">📋 70 CG autorisés</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;">
+              <span style="background:rgba(59,130,246,.15);padding:1px 6px;border-radius:3px;font-family:monospace;">11233</span>
+              <span style="background:rgba(59,130,246,.15);padding:1px 6px;border-radius:3px;font-family:monospace;">23669</span>
+              <span style="background:rgba(59,130,246,.15);padding:1px 6px;border-radius:3px;font-family:monospace;">43993</span>
+              <span style="background:rgba(59,130,246,.15);padding:1px 6px;border-radius:3px;font-family:monospace;">44681</span>
+              <span style="background:rgba(59,130,246,.15);padding:1px 6px;border-radius:3px;font-family:monospace;">46113</span>
+              <span style="background:rgba(59,130,246,.15);padding:1px 6px;border-radius:3px;font-family:monospace;">74171</span>
+              <span style="background:rgba(59,130,246,.15);padding:1px 6px;border-radius:3px;font-family:monospace;">99999</span>
+              <span style="color:rgba(59,130,246,.5);font-size:.68rem;">+ 63 autres...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:20px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#fff;flex-shrink:0;">3</div>
+            <div style="font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:#10b981;">Traitement & Calculs enrichis</div>
+          </div>
+          <p style="font-size:.8rem;color:var(--text-muted);line-height:1.65;margin-bottom:12px;">Parsing ligne par ligne du format TRFJOUR 180 colonnes. Calcul automatique des champs enrichis : MT Diff, DC, MTCUM, SOL, OKREF, vérification du sens CG (DÉBITEUR/CRÉDITEUR/NÉANT).</p>
+          <div style="background:rgba(0,0,0,.2);border-radius:8px;padding:10px;font-size:.72rem;color:rgba(16,185,129,.7);border:1px solid rgba(16,185,129,.1);">
+            <div style="font-weight:600;color:#10b981;margin-bottom:6px;">⚙️ Champs calculés</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;">
+              <span style="background:rgba(16,185,129,.15);padding:1px 6px;border-radius:3px;">MT_DIF</span>
+              <span style="background:rgba(16,185,129,.15);padding:1px 6px;border-radius:3px;">MTCUM</span>
+              <span style="background:rgba(16,185,129,.15);padding:1px 6px;border-radius:3px;">DC</span>
+              <span style="background:rgba(16,185,129,.15);padding:1px 6px;border-radius:3px;">SOL</span>
+              <span style="background:rgba(16,185,129,.15);padding:1px 6px;border-radius:3px;">OKREF</span>
+              <span style="background:rgba(16,185,129,.15);padding:1px 6px;border-radius:3px;">CLE_UNIQUE</span>
+              <span style="background:rgba(16,185,129,.15);padding:1px 6px;border-radius:3px;">NATURE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:20px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#ef4444,#b91c1c);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#fff;flex-shrink:0;">4</div>
+            <div style="font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:#ef4444;">Contrôle des sens CG</div>
+          </div>
+          <p style="font-size:.8rem;color:var(--text-muted);line-height:1.65;margin-bottom:12px;">Vérification automatique du sens attendu de chaque compte CG (DÉBITEUR / CRÉDITEUR / NÉANT) selon la nomenclature bancaire marocaine. Détection des anomalies de solde.</p>
+          <div style="background:rgba(0,0,0,.2);border-radius:8px;padding:10px;font-size:.72rem;border:1px solid rgba(239,68,68,.1);">
+            <div style="font-weight:600;color:#ef4444;margin-bottom:6px;">🔍 Règles de sens</div>
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              <div style="display:flex;justify-content:space-between;"><span style="color:rgba(239,68,68,.7);">DÉBITEUR :</span><span style="color:rgba(255,255,255,.4);font-family:monospace;font-size:.68rem;">11233, 23669, 43993...</span></div>
+              <div style="display:flex;justify-content:space-between;"><span style="color:rgba(16,185,129,.7);">CRÉDITEUR :</span><span style="color:rgba(255,255,255,.4);font-family:monospace;font-size:.68rem;">44681, 74171, 99999...</span></div>
+              <div style="display:flex;justify-content:space-between;"><span style="color:rgba(245,158,11,.7);">NÉANT :</span><span style="color:rgba(255,255,255,.4);font-family:monospace;font-size:.68rem;">46318, 46319, 46331...</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 5 -->
+        <div style="background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.2);border-radius:12px;padding:20px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#6d28d9);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#fff;flex-shrink:0;">5</div>
+            <div style="font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:#8b5cf6;">Synthèse SALAFIN / Réconciliation</div>
+          </div>
+          <p style="font-size:.8rem;color:var(--text-muted);line-height:1.65;margin-bottom:12px;">Module spécial CG 23669 : synthèse SALAFIN avec ajustement manuel du SORT, auto-matching des paires (NF/SS), validation et génération du fichier réconcilié.</p>
+          <div style="background:rgba(0,0,0,.2);border-radius:8px;padding:10px;font-size:.72rem;color:rgba(139,92,246,.7);border:1px solid rgba(139,92,246,.1);">
+            <div style="font-weight:600;color:#8b5cf6;margin-bottom:6px;">🔄 Auto-Match</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <span style="background:rgba(139,92,246,.15);padding:1px 8px;border-radius:4px;">NF — Paire exacte</span>
+              <span style="background:rgba(139,92,246,.15);padding:1px 8px;border-radius:4px;">SS — Somme ≈ 0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 6 -->
+        <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:20px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#C9A84C,#E8C76A);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#0E1420;flex-shrink:0;">6</div>
+            <div style="font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--gold);">Export multi-format & Échantillons</div>
+          </div>
+          <p style="font-size:.8rem;color:var(--text-muted);line-height:1.65;margin-bottom:12px;">Génération des fichiers de sortie enrichis au format TXT (180+colonnes calculées), Excel et CSV. Mode Batch pour traiter toutes les combinaisons en une seule opération.</p>
+          <div style="background:rgba(0,0,0,.2);border-radius:8px;padding:10px;font-size:.72rem;color:rgba(201,168,76,.7);border:1px solid rgba(201,168,76,.1);">
+            <div style="font-weight:600;color:var(--gold);margin-bottom:6px;">📤 Sorties disponibles</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span style="background:rgba(245,158,11,.15);padding:2px 8px;border-radius:4px;">TXT enrichi</span>
+              <span style="background:rgba(16,185,129,.15);padding:2px 8px;border-radius:4px;color:#10b981;">Excel</span>
+              <span style="background:rgba(59,130,246,.15);padding:2px 8px;border-radius:4px;color:#3b82f6;">CSV</span>
+              <span style="background:rgba(245,158,11,.2);padding:2px 8px;border-radius:4px;">Batch ALL</span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <a href="YM_04TRF_PF_70CG.html" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--dark);padding:12px 24px;border-radius:6px;font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;text-decoration:none;transition:transform .3s,box-shadow .3s;box-shadow:0 6px 24px rgba(201,168,76,.25);">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Accéder à l'application
-      </a>
-
-      <div style="margin-top:16px;font-size:.72rem;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-        Compatible Bank of Africa · Formats marocains
+      <!-- Bouton accès -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding-top:20px;border-top:1px solid rgba(201,168,76,.1);">
+        <div style="font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+          Compatible Bank of Africa · Formats monétiques marocains · 180 colonnes TRFJOUR
+        </div>
+        <a href="YM_04TRF_PF_70CG_PRESENTATION.html" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--dark);padding:13px 28px;border-radius:6px;font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;text-decoration:none;box-shadow:0 6px 24px rgba(201,168,76,.3);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Accéder à l'application
+        </a>
       </div>
     </div>
 
@@ -1599,7 +1716,7 @@
         <li><a href="#a-propos">À Propos</a></li>
         <li><a href="#performance">Performances</a></li>
         <li><a href="#fonctionnement">Fonctionnement</a></li>
-        <li><a href="#galerie">Galerie</a></li><li><a href="#video">Vidéo</a></li><li><a href="#contact">Contact</a></li><li><a href="YM_04TRF_PF_70CG.html" style="background:linear-gradient(135deg,#C9A84C,#E8C76A);color:#080C14;padding:8px 18px;border-radius:4px;font-weight:700;">Accéder aux Apps</a></li>
+        <li><a href="#galerie">Galerie</a></li><li><a href="#video">Vidéo</a></li><li><a href="#contact">Contact</a></li><li><a href="YM_04TRF_PF_70CG_PRESENTATION.html" style="background:linear-gradient(135deg,#C9A84C,#E8C76A);color:#080C14;padding:8px 18px;border-radius:4px;font-weight:700;">Accéder aux Apps</a></li>
       </ul>
     </div>
     <div class="footer-col">
